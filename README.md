@@ -89,7 +89,7 @@ print("For Population = 70000, we predict a profit of $"+str(round(predict2,0)))
 ## Output:
 ![Screenshot 2024-02-22 212223 ml1](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/d8b99a3d-474f-42aa-a5a8-e1e74e20835b)
 ![Screenshot 2024-02-22 212340 ml 2](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/85d683d5-8ff1-4d25-8b3a-77a6dd3920ad)
-![Screenshot 2024-02-22 212340](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/3a75a2a9-5530-41d7-9a61-ee2f3f80f39e)
+![Screenshot 2024-02-22 212340](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/c152eb7b-8d44-4f2e-bf79-d53790dd15e9)
 ![Screenshot 2024-02-22 212601](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/2d42ce48-255d-4e99-9918-f7f08568eaa1)
 ![Screenshot 2024-02-22 212736](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/d2c7fecb-c460-4509-8d72-d6f45c40f4ed)
 ![Screenshot 2024-02-22 213026](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/3fd2e2ba-f5ee-4690-ae3c-5b7f00b11b3d)
