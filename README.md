@@ -17,147 +17,55 @@ To write a program to predict the profit of a city using the linear regression m
 4.Plot the Cost function using Gradient Descent and generate the required graph.
 
 ## Program:
-```
-/*
 Program to implement the linear regression using gradient descent.
-Developed by: santhosh kumar B
-RegisterNumber: 212223230193 
-*/
-```
+Developed by: santhosh kumar B 
+RegisterNumber:  212223230193
 import numpy as np
-
-import matplotlib.pyplot as plt
-
 import pandas as pd
-
-data=pd.read_csv("/content/ex1.txt",header = None)
-
-plt.scatter(data[0],data[1])
-
-plt.xticks(np.arange(5,30,step=5))
-
-plt.yticks(np.arange(-5,30,step=5))
-
-plt.xlabel("Population of City(10,000s)")
-
-plt.ylabel("Profit ($10,000)")
-
-plt.title("Profit Prediction")
-
-def computeCost(X,y,theta):
-
-  """
-  Take in a numpy array X,y,theta and generate the cost function of using the in a linear regression model
-  
-  """
-  m=len(y) # length of the training data
-  
-  h=X.dot(theta) #hypothesis
-  
-  square_err=(h-y)**2
-
-  return 1/(2*m) * np.sum(square_err) #returning J
-
-data_n=data.values
-
-m=data_n[:,0].size
-
-X=np.append(np.ones((m,1)),data_n[:,0].reshape(m,1),axis=1)
-
-y=data_n[:,1].reshape(m,1)
-
-theta=np.zeros((2,1))
-
-computeCost(X,y,theta) #Call the function
-
-from matplotlib.container import ErrorbarContainer
-
-from IPython.core.interactiveshell import error
-
-def gradientDescent(X,y,theta,alpha,num_iters):
-    """
-    Take the numpy array X,y,theta and update theta by taking the num_tiers gradient with learning rate of alpha
-
-    return theta and the list of the cost of theta during each iteration
-    """
-
-    m=len(y)
-    
-    J_history=[]
-
-    for i in range(num_iters):
-    
-      predictions=X.dot(theta)
-      
-      error=np.dot(X.transpose(),(predictions -y))
-      
-      descent=alpha *1/m*error
-      
-      theta-=descent
-      
-      J_history.append(computeCost(X,y,theta))
-
-    return theta,J_history
-
-theta,J_history = gradientDescent(X,y,theta,0.01,1500)
-
-print("h(x)="+str(round(theta[0,0],2))+"+"+str(round(theta[1,0],2))+"x1")
-
-#Testing the implementation
-
-plt.plot(J_history)
-
-plt.xlabel("Iteration")
-
-plt.ylabel("$J(\Theta)$")
-
-plt.title("Cost function using Gradient Descent")
-
-
-plt.scatter(data[0],data[1])
-
-x_value=[x for x in range(25)]
-
-y_value=[y*theta[1]+theta[0] for y in x_value]
-
-plt.plot(x_value,y_value,color="r")
-
-plt.xticks(np.arange(5,30,step=5))
-
-plt.yticks(np.arange(-5,30,step=5))
-
-plt.xlabel("Population of City (10,000s)")
-
-plt.ylabel("Profit($10,000")
-
-plt.title("Profit Prediction"
-
-def predict(x,theta):
-  """
-  Tkes in numpy array of x and theta and return the predicted value of y base
-  """
-
-  predictions=np.dot(theta.transpose(),x)
-
-  return predictions[0]
-
-predict1=predict(np.array([1,3.5]),theta)*10000
-
-print("For population =35,000, we predict a profit of $"+str(round(predict1,0)))
-
-predict2=predict(np.array([1,7]),theta)*10000
-
-print("For population = 70,000, we predict a profit of $"+str(round(predict2,0)))
+from sklearn.preprocessing import StandardScaler
+def linear_regression(X1,y,learning_rate=0.01,num_iters=1000):
+    X=np.c_[np.ones(len(X1)),X1]
+    theta = np.zeros(X.shape[1]).reshape(-1,1)
+    for _ in range(num_iters):
+        predictions = (X).dot(theta).reshape(-1,1)
+        errors = (predictions-y).reshape(-1,1)
+        theta-=learning_rate*(1/len(X1))*X.T.dot(errors)
+            return theta
+data=pd.read_csv('50_Startups.csv',header=None)
+data.head()
+X = (data.iloc[1:,:-2].values)
+print(X)
+X1=X.astype(float)
+scaler = StandardScaler()
+y=(data.iloc[1:,-1].values).reshape(-1,1)
+print(y)
+X1_Scaled=scaler.fit_transform(X1)
+Y1_Scaled=scaler.fit_transform(y)
+print(X1_Scaled)
+print(Y1_Scaled)
+theta = linear_regression(X1_Scaled,Y1_Scaled)
+new_data=np.array([165349.2,136897.8,471784.1]).reshape(-1,1)
+new_Scaled = scaler.fit_transform(new_data)
+prediction = np.dot(np.append(1,new_Scaled),theta)
+prediction = prediction.reshape(-1,1)
+pre=scaler.inverse_transform(prediction)
+print(f"Predicted Value:{pre}")
 
 
 ## Output:
-![image 2024-02-22 212223 ml1](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/d8b99a3d-474f-42aa-a5a8-e1e74e20835b)
-![image 2024-02-22 212340 ml 2](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/85d683d5-8ff1-4d25-8b3a-77a6dd3920ad)
-![image 2024-02-22 212340](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/e0ccc771-54f1-45d7-a8dc-e4b4a780ca2d)
-![image 2024-02-22 212601](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/2d42ce48-255d-4e99-9918-f7f08568eaa1)
-![image 2024-02-22 212736](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/d2c7fecb-c460-4509-8d72-d6f45c40f4ed)
-![image2024-02-22 213026](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/3fd2e2ba-f5ee-4690-ae3c-5b7f00b11b3d)
-![image 2024-02-22 212918](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/fd5ebce2-b342-4314-ac30-059cf0fa8576)
+![image](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/d8130240-00d9-4a13-958f-dd5d72f3a8cc)
+
+![image](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/3dd917a4-11d6-4109-b277-4d1c144df82d)
+
+![image](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/45014662-70a1-4913-9d34-0470cd52a2d9)
+
+![image](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/018618ad-2127-43bb-bcd7-093e8852a65d)
+
+![image](https://github.com/Santhoshstudent/Implementation-of-Linear-Regression-Using-Gradient-Descent/assets/145446853/6ee40660-62fd-4d24-b64e-272226cfe378)
+
+
+
+
 
 
 
